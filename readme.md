@@ -40,7 +40,9 @@
 If you have created the schema you are good to go. Run the project from IDE and type http://localhost:8080/ to your browser once the application is up and running.
 
 ## Screenshots
-![2022-07-15 13 28 15](https://user-images.githubusercontent.com/83312431/179205811-3a767aa6-672f-4ff7-8b35-e2788ce3aab2.png)
+![2022-08-07 19 31 57](https://user-images.githubusercontent.com/83312431/183301248-3f852970-d814-4a18-baf7-eb16690858d3.png)
+
+![2022-07-16 01 08 12](https://user-images.githubusercontent.com/83312431/179317547-90eebcd0-7019-4545-aad3-5969b4c4daf2.png)
 
 ![2022-07-15 13 26 50](https://user-images.githubusercontent.com/83312431/179205624-f1cdd0ed-c424-4f9b-8247-d64ba084f66d.png)
 
