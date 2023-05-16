@@ -62,10 +62,11 @@ public class MainController {
     }
 
     @PostMapping("/register")
-    public @ResponseBody Boolean createAccount(@RequestParam String userName, @RequestParam String userPassword, @RequestParam String userMail, @RequestParam String userImageURL){
+    public @ResponseBody Boolean createAccount(@RequestParam String userName,@RequestParam String userSurname, @RequestParam String userPassword, @RequestParam String userMail, @RequestParam String userImageURL){
         User user = new User();
         user.setUserMail(userMail);
         user.setUserName(userName);
+        user.setUserSurname(userSurname);
         user.setUserPassword(userPassword);
         user.setUserImageURL(userImageURL);
         user.setUserRole("USER");

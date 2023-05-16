@@ -22,7 +22,6 @@
 ### Features - To Be Added.
 * Profile page for users where they can edit their information
 * Log page for admins to see the activity.
-* Custom Error Pages
 
 ## How To Run The Project
 * This project uses MySQL as its database so you will need to have it installed on your PC

@@ -17,6 +17,8 @@ public class User {
 
     private String userName;
 
+    private String userSurname;
+
     private String userPassword;
 
     @Column(columnDefinition = "VARCHAR(150) NOT NULL", unique = true)
@@ -28,6 +30,9 @@ public class User {
     private LocalDateTime userCreationDate;
 
     private String userImageURL;
+
+    @Column(columnDefinition = "TEXT")
+    private String userBIO;
 
     @OneToMany(targetEntity = Weather.class, cascade = CascadeType.ALL, mappedBy = "user")
     private List<Weather> weatherList;

@@ -24,7 +24,8 @@ public class WeatherAppApplication {
 		if (adminList.size() == 0){
 			User user = new User();
 
-			user.setUserName("ADMIN ACCOUNT - 1");
+			user.setUserName("Admin");
+			user.setUserSurname("Auto Generated");
 			user.setUserMail("sefa@admin.com");
 			user.setUserPassword(new BCryptPasswordEncoder().encode("123456"));
 			user.setUserRole("ADMIN");

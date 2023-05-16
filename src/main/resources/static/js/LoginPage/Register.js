@@ -79,6 +79,7 @@ async function ImageUpload(){
 function createUser(imageURL){
     let formData = new FormData();
     formData.append("userName", $("#registerName").val());
+    formData.append("userSurname", $("#registerSurname").val());
     formData.append("userPassword", $("#registerPassword").val());
     formData.append('userMail', $("#registerMail").val());
     formData.append("userImageURL", imageURL);
@@ -102,6 +103,7 @@ function createUser(imageURL){
                     uploadStatus.style.display='none'
                     $('#registerStatus').val('');
                     $("#registerName").val('');
+                    $("#registerSurname").val('');
                     $("#registerPassword").val('');
                     $("#registerMail").val('');
                     $("#registerPasswordConfirm").val('');

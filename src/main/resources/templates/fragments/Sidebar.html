@@ -28,7 +28,7 @@
 
                 <div class="text logo-text">
                     <span class="name">Welcome</span>
-                    <span class="profession" th:if="${user != null}" th:text="${user.getUserName()}">*Your Name*</span>
+                    <span class="profession" th:if="${user != null}" th:text="${user.getUserName() + ' ' + user.getUserSurname()}">*Your Name*</span>
                 </div>
 
             </div>
@@ -54,7 +54,7 @@
                         </a>
                     </li>
 
-                    <li th:if="${user.getUserRole == 'USER'}">
+                    <li th:if="${user.getUserRole() == 'USER'}">
 <!--                        <a th:href="@{/home/weatherRecords(page=1)}">-->
                         <a th:href="@{'/home/weatherRecords?page=1&sortby=date&sortdir=desc'}">
                             <i class='bx bx-bar-chart-alt-2 icon' ></i>
@@ -62,35 +62,35 @@
                         </a>
                     </li>
 
-                    <li th:if="${user.getUserRole == 'USER'}">
-                        <a href="#">
+                    <li th:if="${user.getUserRole() == 'USER'}">
+                        <a th:href="@{'/profile'}">
                             <i class='bx bx-heart icon'></i>
                             <span class="text nav-text">Profile</span>
                         </a>
                     </li>
 
-                    <li th:if="${user.getUserRole == 'ADMIN'}">
+                    <li th:if="${user.getUserRole() == 'ADMIN'}">
                         <a href="/admin/userList">
                             <i class='bx bxs-user-detail icon'></i>
                             <span class="text nav-text">User List</span>
                         </a>
                     </li>
 
-                    <li th:if="${user.getUserRole == 'ADMIN'}">
+                    <li th:if="${user.getUserRole() == 'ADMIN'}">
                         <a href="/admin/adminList">
                             <i class='bx bxs-user-detail icon'></i>
                             <span class="text nav-text">Admin List</span>
                         </a>
                     </li>
 
-                    <li th:if="${user.getUserRole == 'ADMIN'}">
+                    <li th:if="${user.getUserRole() == 'ADMIN'}">
                         <a href="/admin/bannedUsers">
                             <i class='bx bx-bell icon'></i>
                             <span class="text nav-text">Banned Users</span>
                         </a>
                     </li>
 
-                    <li th:if="${user.getUserRole == 'ADMIN'}">
+                    <li th:if="${user.getUserRole() == 'ADMIN'}">
                         <a href="/admin/logs">
                             <i class='bx bx-pie-chart-alt icon' ></i>
                             <span class="text nav-text">Logs</span>
@@ -100,13 +100,13 @@
             </div>
 
             <div class="bottom-content">
-                <li class="" th:if="${user == nul}">
+                <li class="" th:if="${user == null}">
                     <a href="/login">
                         <i class='bx bx-log-in icon' ></i>
                         <span class="text nav-text">Login</span>
                     </a>
                 </li>
-                <li class="" th:if="${user != nul}">
+                <li class="" th:if="${user != null}">
                     <a href="/logout">
                         <i class='bx bx-log-out icon' ></i>
                         <span class="text nav-text">Logout</span>
