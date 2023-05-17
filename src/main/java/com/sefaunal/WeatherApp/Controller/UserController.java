@@ -4,6 +4,7 @@ import com.sefaunal.WeatherApp.Model.User;
 import com.sefaunal.WeatherApp.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,6 +52,31 @@ public class UserController {
             }
         }
 
+        else {
+            return "Error403";
+        }
+    }
+
+    @PostMapping("/profile/updatePassword")
+    public @ResponseBody String updatePassword(Principal principal, @RequestParam Long userID, @RequestParam String oldPassword, @RequestParam String newPassword) {
+        User currentUser = userService.findByUserMail(principal.getName());
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+
+        if (currentUser.getUserID() == userID) {
+            if (bCryptPasswordEncoder.matches(oldPassword, currentUser.getUserPassword())) {
+                currentUser.setUserPassword(new BCryptPasswordEncoder().encode(newPassword));
+
+                try {
+                    userService.createUser(currentUser);
+                    return "success";
+                }catch (Exception e) {
+                    return e.getMessage();
+                }
+            }
+            else {
+                return "OldPasswordNotMatch";
+            }
+        }
         else {
             return "Error403";
         }

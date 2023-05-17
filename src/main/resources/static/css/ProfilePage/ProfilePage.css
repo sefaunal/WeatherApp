@@ -87,7 +87,7 @@ body {
     text-align: center;
 }
 
-.toggle-password:before,
+.toggle-password-old:before,
 .toggle-password-new:before,
 .toggle-password-retype:before {
     position: absolute;

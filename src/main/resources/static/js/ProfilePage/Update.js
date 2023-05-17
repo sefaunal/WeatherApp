@@ -97,14 +97,69 @@ function updateProfile() {
         })
     }
     else {
-        alert("Wrong Confirmation Number!")
+        alert("Wrong Confirmation Number!");
         confirmationCode = Math.floor(100000 + Math.random() * 900000);
         document.getElementById("validationCodeSpan").innerText = "Confirmation Code: " + confirmationCode;
     }
 }
 
 function updatePassword() {
+    if ($("#validationCode").val() == confirmationCode) {
+        if ($("#new-password").val() == $("#new-password-retype").val()) {
+            let formData = new FormData;
+            formData.append("userID", $("#userID").val());
+            formData.append("oldPassword", $("#old-password").val());
+            formData.append("newPassword", $("#new-password").val());
 
+            $.ajax({
+                method:'post',
+                processData: false,
+                contentType: false,
+                cache: false,
+                data: formData,
+                url: 'profile/updatePassword',
+                success: function (data) {
+                    if (data == "success") {
+                        document.getElementById("resultPopupText").innerText = "Password have been successfully changed";
+                        selected = "cancel";
+                        $("#redirectToUpdate").click();
+                        resultPopupToggle();
+                        document.getElementById("resultConfirmButton").onclick = function () {
+                            history.go(0);
+                        }
+                    }
+
+                    else if (data == "OldPasswordNotMatch") {
+                        document.getElementById("resultPopupText").innerText = "Old password that you entered is wrong";
+                        selected = "cancel";
+                        $("#redirectToUpdate").click();
+                        resultPopupToggle();
+                        document.getElementById("resultConfirmButton").onclick = function () {
+                            history.go(0);
+                        }
+                    }
+
+                    else {
+                        document.getElementById("resultPopupText").innerText = data;
+                        selected = "cancel";
+                        $("#redirectToUpdate").click();
+                        resultPopupToggle();
+                        document.getElementById("resultConfirmButton").onclick = function () {
+                            history.go(0);
+                        }
+                    }
+                }
+            })
+        }
+        else {
+            alert("New Passwords Do Not Match!");
+        }
+    }
+    else {
+        alert("Wrong Confirmation Code!");
+        confirmationCode = Math.floor(100000 + Math.random() * 900000);
+        document.getElementById("validationCodeSpan").innerText = "Confirmation Code: " + confirmationCode;
+    }
 }
 
 async function uploadImageToFirebase(){
