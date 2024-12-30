@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <!----======== CSS ======== -->
+    <link rel="stylesheet" href="/static/css/SidebarF.css">
+
+    <title>Dashboard Sidebar Menu</title>
+</head>
+<body>
+<div th:fragment="sidebar">
+    <nav class="sidebar close">
+        <header>
+            <div class="image-text">
+                <span class="image" th:if="${user == null}">
+                    <img src="/static/images/favicon.png" alt="">
+                </span>
+
+                <span class="image" th:if="${user != null}">
+                    <img src="/static/images/favicon.png" alt="" th:src="${user.getUserImageURL()}">
+                </span>
+
+                <div class="text logo-text">
+                    <span class="name">Welcome</span>
+                    <span class="profession" th:if="${user != null}" th:text="${user.getUserName() + ' ' + user.getUserSurname()}">*Your Name*</span>
+                </div>
+
+            </div>
+
+            <i class='bx bx-chevron-right toggle'></i>
+        </header>
+
+        <div class="menu-bar">
+            <div class="menu">
+                <form id="SearchForm">
+                <li class="search-box">
+                    <i class='bx bx-search icon'></i>
+                    <input id="searchInput" type="text" placeholder="Search...">
+                    <button type="submit" hidden></button>
+                </li>
+                </form>
+
+                <ul class="menu-links" th:if="${user != null}">
+                    <li>
+                        <a href="/home">
+                            <i class='bx bx-home-alt icon'></i>
+                            <span class="text nav-text">Home</span>
+                        </a>
+                    </li>
+
+                    <li th:if="${user.getUserRole() == 'USER'}">
+<!--                        <a th:href="@{/home/weatherRecords(page=1)}">-->
+                        <a th:href="@{'/home/weatherRecords?page=1&sortby=date&sortdir=desc'}">
+                            <i class='bx bx-bar-chart-alt-2 icon' ></i>
+                            <span class="text nav-text">My Records</span>
+                        </a>
+                    </li>
+
+                    <li th:if="${user.getUserRole() == 'USER'}">
+                        <a th:href="@{'/profile'}">
+                            <i class='bx bx-heart icon'></i>
+                            <span class="text nav-text">Profile</span>
+                        </a>
+                    </li>
+
+                    <li th:if="${user.getUserRole() == 'ADMIN'}">
+                        <a href="/admin/userList">
+                            <i class='bx bxs-user-detail icon'></i>
+                            <span class="text nav-text">User List</span>
+                        </a>
+                    </li>
+
+                    <li th:if="${user.getUserRole() == 'ADMIN'}">
+                        <a href="/admin/adminList">
+                            <i class='bx bxs-user-detail icon'></i>
+                            <span class="text nav-text">Admin List</span>
+                        </a>
+                    </li>
+
+                    <li th:if="${user.getUserRole() == 'ADMIN'}">
+                        <a href="/admin/bannedUsers">
+                            <i class='bx bx-bell icon'></i>
+                            <span class="text nav-text">Banned Users</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bottom-content">
+                <li class="" th:if="${user == null}">
+                    <a href="/login">
+                        <i class='bx bx-log-in icon' ></i>
+                        <span class="text nav-text">Login</span>
+                    </a>
+                </li>
+                <li class="" th:if="${user != null}">
+                    <a href="/logout">
+                        <i class='bx bx-log-out icon' ></i>
+                        <span class="text nav-text">Logout</span>
+                    </a>
+                </li>
+            </div>
+        </div>
+
+    </nav>
+
+    <section class="home" th:fragment="headerOnly">
+        <div class="container-navbar">
+            <div class="navbar">
+                <a class="logo" href="/home">Weather App</a>
+            </div>
+        </div>
+    </section>
+</div>
+    <script src="/static/js/SidebarF.js"></script>
+
+</body>
+</html>

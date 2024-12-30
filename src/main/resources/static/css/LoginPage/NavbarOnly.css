@@ -1,0 +1,22 @@
+.container-navbar{
+    background-color: #242526;
+}
+
+.navbar{
+    height: 12%;
+    display: flex;
+    align-items: center;
+}
+
+.logo{
+    flex: 2;
+    text-align: right;
+    cursor: pointer;
+    color: #fff;
+    font-size: 17px;
+    text-decoration: none;
+}
+.logo:hover{
+    text-decoration: none;
+    color: red;
+}

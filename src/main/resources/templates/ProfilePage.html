@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Account Settings</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    <link rel="icon" href="/static/images/favicon.png">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="/static/css/SidebarF.css">
+    <link rel="stylesheet" href="/static/css/HomePage.css">
+    <link rel="stylesheet" href="/static/css/ProfilePage/ProfilePage.css">
+</head>
+<body>
+<div th:replace="fragments/Sidebar :: sidebar"></div>
+
+    <div class="container-fluid" id="blur">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-6 col-sm-12 col-xs-12">
+                <div class="card p-4">
+                    <div class="nav nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <a class="nav-link active" id="account-tab" data-toggle="pill" href="#account" role="tab" aria-controls="account" aria-selected="true">
+                            <i class="fa fa-home text-center mr-1"></i>
+                            Account
+                        </a>
+                        <a class="nav-link" id="password-tab" data-toggle="pill" href="#password" role="tab" aria-controls="password" aria-selected="false">
+                            <i class="fa fa-key text-center mr-1"></i>
+                            Password
+                        </a>
+                    </div>
+
+
+                    <div class="img-circle text-center mb-3" id="ProfileImageDIV">
+                        <img th:src="${user.getUserImageURL()}" alt="Image" class="shadow" id="ProfileImage" style="cursor: pointer;">
+                    </div>
+                    <h4 class="text-center" th:text="${user.getUserName()}">Name Surname</h4>
+
+
+                    <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
+                        <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
+                            <h3 class="mb-4">Profile Information</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>User ID</label>
+                                        <input type="text" class="form-control" id="userID" th:field="${user.userID}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Account Creation Date</label>
+                                        <input type="text" class="form-control" th:field="${user.userCreationDate}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>First Name</label>
+                                        <input type="text" class="form-control" id="userName" th:field="${user.userName}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Last Name</label>
+                                        <input type="text" class="form-control" id="userSurname" th:field="${user.userSurname}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input type="text" class="form-control" id="userMail" th:field="${user.userMail}">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Bio</label>
+                                        <textarea class="form-control" rows="4" id="userBIO" th:field="${user.userBIO}"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary" id="accountToggle" >Update</button>
+                                <button class="btn btn-light" onClick="history.go(0);">Cancel</button>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
+                            <h3 class="mb-4">Password Settings</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Old password</label>
+                                        <input name="password" id="old-password" type="password" class="form-control">
+                                        <span toggle="#password-field" class="fa fa-fw fa-eye-slash field-icon toggle-password-old"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>New password</label>
+                                        <input name="password" id="new-password" type="password" class="form-control">
+                                        <span toggle="#password-field" class="fa fa-fw fa-eye-slash field-icon toggle-password-new"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Confirm new password</label>
+                                        <input name="password" id="new-password-retype" type="password" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary" id="passwordToggle">Update</button>
+                                <button class="btn btn-light" onClick="history.go(0);">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="popup">
+        <h2>Security Check</h2>
+        <div class="form-group mt-3">
+            <span id="validationCodeSpan">Confirmation Code</span>
+            <input id="validationCode" type="text" class="form-control" required>
+            <input id="imageUpdateStatus" type="text" class="form-control" readonly>
+        </div>
+
+        <div>
+            <button class="btn btn-primary" id="redirectToUpdate">Update</button>
+            <button class="btn btn-light" id="popupCancel">Cancel</button>
+        </div>
+    </div>
+
+    <div id="resultPopup">
+        <div class="form-group mt-3">
+            <span id="resultPopupText">Account information has been successfully changed</span>
+        </div>
+        <div>
+            <button class="btn btn-primary"><a id="resultConfirmButton">Confirm</a></button>
+        </div>
+    </div>
+
+<script>
+    $("#SearchForm").submit(function (event) {
+        event.preventDefault();
+    });
+</script>
+
+<script type="module" src="/static/js/LoginPage/Firebase.js"></script>
+<script type="module" src="/static/js/ProfilePage/Update.js"></script>
+<script src="/static/js/SidebarF.js"></script>
+<script src="/static/js/ProfilePage/Image.js"></script>
+<script src="/static/js/LoginPage/PasswordToggle.js"></script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+  <!-- Style -->
+  <link rel="stylesheet" href="/static/css/SidebarF.css">
+  <link rel="stylesheet" href="/static/css/WeatherList.css">
+
+  <link rel="icon" href="/static/images/favicon.png">
+
+  <title th:if="${ViewType == 'USER'}">User List</title>
+  <title th:if="${ViewType == 'ADMIN'}">Admin List</title>
+  <title th:if="${ViewType == 'BANNED'}">Banned Users</title>
+</head>
+<body>
+<div th:replace="fragments/Sidebar :: sidebar"></div>
+
+<div class="content">
+
+  <div class="container">
+    <h2 class="mb-5" th:if="${ViewType == 'USER'}">User List</h2>
+    <h2 class="mb-5" th:if="${ViewType == 'ADMIN'}">Admin List</h2>
+    <h2 class="mb-5" th:if="${ViewType == 'BANNED'}">Banned Users</h2>
+
+    <div class="table-responsive">
+
+      <table class="table table-striped custom-table">
+        <thead>
+        <tr>
+
+          <th scope="col">User ID</th>
+          <th scope="col">User Image <br><span style="font-size: 7px">Click to View Source</span></th>
+          <th scope="col">User Name & Surname</th>
+          <th scope="col">User Mail</th>
+          <th scope="col">User Role</th>
+          <th scope="col">Account Creation Date</th>
+          <th scope="col"></th>
+
+          <th th:if="${ViewType == 'BANNED'}"></th>
+
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr scope="row" th:each="user_f : ${userList}">
+
+          <td th:text="${user_f.getUserID()}">0001</td>
+          <td> <img src="//cdn.weatherapi.com/weather/64x64/day/116.png" alt="" th:src="${user_f.getUserImageURL()}" onclick="viewSRC(this)"> </td>
+          <td th:text="${user_f.getUserName()}">Name - Surname</td>
+          <td th:text="${user_f.getUserMail()}">Mail Address</td>
+          <td th:text="${user_f.getUserRole()}">ROLE</td>
+          <td th:text="${user_f.getUserCreationDate()}">11.07.2022 17:22</td>
+
+          <td th:if="${ViewType == 'USER' || ViewType == 'ADMIN' && user != user_f}">
+            <a class="more" th:href="@{/admin/banUser(userID=${user_f.getUserID()},ViewType=${ViewType})}">BAN</a>
+          </td>
+
+          <td th:if="${user != user_f && ViewType == 'BANNED'}">
+            <a class="more" th:href="@{/admin/deleteUser(userID=${user_f.getUserID()},ViewType=${ViewType})}">DELETE</a>
+          </td>
+
+          <td th:if="${ViewType == 'BANNED'}">
+            <a class="more more2" th:href="@{/admin/removeBan(userID=${user_f.getUserID()})}">UNBAN</a>
+          </td>
+
+        </tr>
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+  function viewSRC(element){
+    alert(element.src)
+  }
+</script>
+<script src="/static/js/SidebarF.js"></script>
+</body>
+</html>

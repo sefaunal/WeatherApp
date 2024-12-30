@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="/static/css/SidebarF.css">
+    <link rel="stylesheet" href="/static/css/HomePage.css">
+
+    <link rel="icon" href="/static/images/favicon.png">
+</head>
+
+<body>
+<div th:replace="fragments/Sidebar :: sidebar"></div>
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-4 col-sm-12 col-xs-12">
+            <div class="card p-4">
+
+                <div class="d-flex">
+                    <h6 id="weatherCity" class="flex-grow-1">London</h6>
+                    <h6 id="weatherTime">16:08</h6>
+                </div>
+
+                <div class="d-flex flex-column temp mt-5 mb-3">
+                    <h1 id="weatherTemp" class="mb-0 font-weight-bold"> 13&deg; C </h1>
+                    <span id="weatherStatus" class="small">Stormy</span>
+                </div>
+
+                <div class="d-flex">
+                    <div class="temp-details flex-grow-1">
+
+                        <p class="my-1">
+                            <img src="https://i.imgur.com/B9kqOzp.png" height="25px" >
+                            <span id="weatherWind" style="color: black"> 40 km/h  </span>
+                        </p>
+
+                        <p class="my-1">
+                            <img src="https://cdn-icons-png.flaticon.com/512/1582/1582886.png" height="25px">
+                            <span id="weatherHumidity" style="color: black"> 84% </span>
+                        </p>
+
+                        <p class="my-1">
+                            <img id="weatherPressureIMG" src="https://cdn4.iconfinder.com/data/icons/electric-vehicle-set/25/Air_Pressure-512.png" height="25px" >
+                            <span id="weatherPressure" style="color: black"> 1013hPa </span>
+                        </p>
+
+                    </div>
+
+                    <div>
+                        <img id="weatherIcon" src="https://i.imgur.com/Qw7npIg.png" width="100px">
+                    </div>
+                </div>
+
+                <div id="weatherWeek">
+                <div class="row d-flex px-3 mt-auto">
+                    <div id="DivDayName0" class="d-flex flex-column block first-block active" onclick="getWeatherFromAPI()">
+                        <small id="dayName0" class="text-muted mb-0">0</small>
+                        <h6 id="dayTemp0"><strong>?</strong></h6>
+                    </div>
+                    <div id="DivDayName1" class="d-flex flex-column block" onclick="getWeatherForecast(1)">
+                        <small id="dayName1" class="text-muted mb-0">1</small>
+                        <h6 id="dayTemp1"><strong>?</strong></h6>
+                    </div>
+                    <div id="DivDayName2" class="d-flex flex-column block" onclick="getWeatherForecast(2)">
+                        <small id="dayName2" class="text-muted mb-0">2</small>
+                        <h6 id="dayTemp2"><strong>?</strong></h6>
+                    </div>
+                    <div class="d-flex flex-column block" onclick="FreeAPIAlert()">
+                        <small id="dayName3" class="text-muted mb-0">3</small>
+                        <h6 id="dayTemp3"><strong>?</strong></h6>
+                    </div>
+                    <div class="d-flex flex-column block last-block" onclick="FreeAPIAlert()">
+                        <small id="dayName4" class="text-muted mb-0">4</small>
+                        <h6 id="dayTemp4"><strong>?</strong></h6>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            <div id="saveWeatherDIV">
+                <div th:if="${user != null}">
+                    <div id="saveWeatherButton" class="button" th:if="${user.getUserRole == 'USER'}" onclick="SaveWeather()">Save Weather</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="/static/js/SidebarF.js"></script>
+<script src="/static/js/HomePage.js"></script>
+</body>
+</html>

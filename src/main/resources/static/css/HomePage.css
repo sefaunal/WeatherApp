@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Marcellus', serif;
+}
+
+body {
+    /*background-color: #343A46;*/
+    /*display: grid;*/
+    place-items: center;
+}
+
+.card {
+    margin-top: 50px;
+    margin-bottom: 25px;
+    background-color: #FFFFFF;
+    border-radius: 50px;
+    color: #6f707d;
+    font-family: 'Marcellus', serif;
+}
+#weatherTemp{
+    font-size: 55px;
+    color: #2b304d;
+}
+
+.temp{
+    place-items: center;
+}
+
+.temp-details > p >span, .grey{
+    color: #a3acc1;
+    font-size: 12px;
+}
+
+.my-1{
+    padding-bottom: 5px;
+}
+
+*:focus{
+    outline: none;
+}
+
+/*-----------------------------*/
+.container-fluid{
+    margin-top: 75px;
+}
+.block {
+    width: 20%;
+    background-color: #D6EFED;
+    cursor: pointer;
+    padding: 6px 0px 3px 15px; /* top / right / bottom / left */
+
+}
+
+.first-block {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.last-block {
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.block.active, .block:hover {
+    background-color: #C9BBCF;
+}
+
+.city-symbol {
+    width: 200px;
+    height: 250px;
+}
+
+.large-font {
+    font-size: 60px;
+}
+
+.symbol-img {
+    width: 40px;
+    height: 40px;
+}
+
+/*------------------*/
+
+.button {
+    display: inline-block;
+    background: #A2B5BB;
+    color: #fff;
+    text-transform: uppercase;
+    padding: 15px 25px;
+    border-radius: 5px;
+    box-shadow: 0px 17px 10px -10px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    -webkit-transition: all ease-in-out 300ms;
+    transition: all ease-in-out 300ms;
+}
+.button:hover {
+    box-shadow: 0px 30px 13px -13px rgba(0, 0, 0, 0.2);
+    -webkit-transform: translate(0px, -5px) scale(1.1);
+    transform: translate(0px, -5px) scale(1.1);
+}
